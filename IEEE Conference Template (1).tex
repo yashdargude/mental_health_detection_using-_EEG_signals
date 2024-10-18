@@ -1,0 +1,434 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+
+% Package imports
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{longtable}
+\usepackage{xcolor}
+\usepackage{lscape} % For landscape orientation
+\usepackage{adjustbox} % For scaling content
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+    
+\begin{document}
+
+\title{Mental health detection using EEG signals\\
+{\footnotesize \textsuperscript{*}}
+
+}
+
+\author{
+    \begin{tabular}{cc} % Two columns
+        \begin{tabular}{c} % First author block
+            \IEEEauthorblockN{Yash Vilas Dargude} \\[-5ex] 
+            \IEEEauthorblockA{Department of Electronics \& Telecommunication \\
+            Pune Institute Of Computer Technology\\
+            Pune, India \\
+            yashdargude567@gmail.com}
+        \end{tabular} & % End of first author block
+        \begin{tabular}{c} \\[-6ex] % Second author block
+            \IEEEauthorblockN{Jui Haresh Ambekar} \\[-5ex]
+            \IEEEauthorblockA{Department of Electronics \& Telecommunication \\
+            Pune Institute Of Computer Technology\\
+            Pune, India \\
+            juihambekar@gmail.com}
+        \end{tabular} \\ % End of second author block
+        \\ % Empty line for spacing
+        \begin{tabular}{c} % Third author block
+            \IEEEauthorblockN{Yash Rajendra Gadakh} \\[-5ex]
+            \IEEEauthorblockA{Department of Electronics \& Telecommunication \\
+            Pune Institute Of Computer Technology\\
+            Pune, India \\
+            yash.gadakh18@gmail.com}
+        \end{tabular} & % End of third author block
+        \begin{tabular}{c} % Fourth author block
+            \IEEEauthorblockN{Dr. S.T. Gandhe} \\[-5ex]
+            \IEEEauthorblockA{Department of Electronics \& Telecommunication \\
+            Pune Institute Of Computer Technology\\
+            Pune, India \\
+            email address or ORCID}
+        \end{tabular} % End of fourth author block
+    \end{tabular} % End of outer tabular
+}
+
+\maketitle
+
+\begin{abstract}
+The global mental health challenges include the condition of depression, anxiety, and stress that has effects on the performance of the individuals as well as their well-being. Early diagnosis becomes an important factor for effective intervention in such cases, though the conventional methods rely on subjective estimations, which might be a delay to the approach of intervention. EEG is being admitted generally as a non-invasive tool with objective brain activity monitor that may offer insightful information.
+regarding mental conditions. This review paper goes through
+the last up-to-date results on detection of mental health
+through EEG signals. We present the EEG systems, focusing
+on the signal processing techniques used in the development process: filtering, artifact removal, and noise
+reduction. Features and feature extraction methods in
+time-domain, frequency-domain, and time-frequency domain
+are presented, with special attention to patterns of activity
+in brainwaves in relation to states of mind
+of mental health. For instance, we covered several classes
+of machine learning and deep learning models, including Support
+Vector Machines (SVM), Random Forest, and Convolutional
+Neural Networks (CNNs), which have been used in classifying
+mental health conditions by EEG. The paper also discusses
+a detailed exploration of the efficiency of these models in
+detecting some mental conditions such as depression,
+anxiety, and stress. Challenges on using EEG for mental health
+Some of the other issues, for example variability in signal and the requirement of large datasets, are presented. Then, future directions to enhance accuracy and generalizability of these models are presented. Contributions to the aims of this survey contribute to the development of more reliable, EEG-based diagnostic tools for the assessment of mental health. 
+\end{abstract}
+
+\begin{IEEEkeywords}
+EEG signals, mental health detection, deep learning, classification, depression diagnosis, machine learning, feature extraction, signal processing
+\end{IEEEkeywords}
+
+\section{Introduction}
+Mental health is a cornerstone of human well-being, affecting how individuals perceive and interact with the world around them. It encompasses a broad spectrum of emotional, cognitive, and behavioral states that influence daily functioning. Although conditions like depression and anxiety are commonly highlighted, mental health encompasses far more than these disorders. Individuals can experience stress, cognitive overload, emotional fluctuations, or other subtle psychological states that, if left unrecognized, may affect their quality of life. With growing global awareness around mental health, the need for early detection and intervention has become a pressing issue.
+
+Recent technological advancements have opened new pathways for non-invasive mental health monitoring, with electroencephalography (EEG) emerging as a promising tool. EEG measures electrical brain activity through electrodes placed on the scalp, capturing real-time data that can reflect underlying mental states. Unlike traditional self-reported assessments, EEG allows for continuous and objective monitoring of brain functions, offering a clearer picture of a person’s mental health beyond subjective bias.
+
+Research has increasingly focused on analyzing EEG signals using machine learning and deep learning techniques. By identifying patterns in brainwave data, these models can classify and predict mental health states, such as cognitive strain, emotional instability, or stress, in addition to more severe conditions like depression. Signal processing methods like wavelet transform, Fourier transform, and time-frequency analysis enable the extraction of meaningful features from raw EEG data, which are then fed into classification models such as support vector machines (SVM), convolutional neural networks (CNN), or recurrent neural networks (RNN).
+
+This paper aims to synthesize insights from multiple studies exploring EEG-based mental health detection systems. The focus will be on the methodologies, algorithms, and signal processing techniques utilized across various research papers. While many studies concentrate on detecting depression, this work expands the scope to include broader mental health states. By providing a comprehensive overview of EEG’s role in identifying cognitive and emotional states, this paper will contribute to the growing body of research on mental health diagnostics, illustrating the potential for EEG-driven technologies to support real-time mental health monitoring and early intervention.
+
+\section{Related Work}
+
+\subsection{Maintaining the Integrity of the Specifications}
+
+In recent years, numerous studies have explored the application of deep learning and machine learning techniques to detect mental health states using EEG signals. Peng et al.[1] introduced a semi-supervised model for emotion recognition through EEG signals, using a self-weighted variable to adaptively measure the contributions of various features. Their model achieved excellent results in cross-session emotion recognition[7]. Another contribution by Zhang, Zhongyi et al. proposed DepCap, a novel deep learning-based wearable device for real-time depression detection, combining CNN-LSTM for temporal and spatial data extraction[9] . Hanshu Cai et al. employed quadratic SVM classifiers for EEG-based mental health diagnostics, demonstrating high accuracy using melamine patterns[42]. Ayan Seal et al. developed a deep learning framework integrating attention-based modules for efficient depression detection[38]. These works collectively showcase advancements in EEG signal-based mental health detection, contributing to a more accurate understanding of mental states. various studies have focused on applying machine learning and deep learning techniques for mental health detection using EEG signals. chang Su et al.[31] introduced a hybrid CNN-RNN model to classify emotional states from EEG data, effectively capturing both temporal and spatial features with significant accuracy across different subjects. Similarly, Li et al. developed a multi-layer perceptron (MLP) framework, which utilized feature selection techniques to enhance real-time stress detection based on EEG signals, achieving promising results in multi-class classification. Another notable contribution by Chen et al. involved using deep reinforcement learning (DRL) to optimize EEG feature extraction for anxiety detection, resulting in improved predictive performance. Lastly, Kumar et al. employed an ensemble of decision trees for diagnosing mental health conditions, leveraging EEG data from diverse populations to generalize the model across various demographics. Collectively, these advancements highlight the growing efficacy of EEG-based models in accurately detecting mental health conditions.
+
+
+
+\section{Dataset Description}
+
+The dataset used in this study consists of EEG recordings from subjects before and during mental arithmetic tasks. These recordings were obtained using the \textbf{Neurocom EEG 23-channel system} (Ukraine, XAI-MEDICA), employing \textbf{silver/silver chloride electrodes}. The electrodes were placed on the scalp following the standardized \textbf{International 10/20 system}, which is widely used for EEG studies to ensure uniform and accurate electrode positioning across different regions of the brain. The 19 electrodes placed on the scalp correspond to the following regions: \textbf{Fp1, Fp2, F3, F4, F7, F8, T3, T4, C3, C4, T5, T6, P3, P4, O1, O2, Fz, Cz, Pz}. These electrode placements are crucial for capturing electrical activity from the frontal, temporal, parietal, and occipital lobes, which are associated with various cognitive and emotional functions.
+
+The EEG signals were recorded using a \textbf{high-pass filter} with a 30 Hz cut-off frequency, and a \textbf{50 Hz notch filter} was applied to remove powerline noise. These preprocessing steps were followed by the use of \textbf{Independent Component Analysis (ICA)} to eliminate artifacts caused by eye movements, muscle activity, and heartbeats, ensuring cleaner signals for analysis. Each EEG segment in the dataset is 60 seconds long and artifact-free, providing high-quality data for studying brain activity during cognitive tasks.
+
+During data collection, subjects were asked to perform a mental arithmetic task involving serial subtraction of two numbers. Each trial began with the oral communication of a 4-digit minuend and a 2-digit subtrahend (e.g., 3141 and 42), and the subjects were required to perform the subtraction mentally. This cognitive task is designed to induce mental workload and engage brain regions associated with attention, memory, and arithmetic processing.
+
+The dataset comprises \textbf{36 CSV files}, one for each subject, with 19 channels representing the different electrode placements. This dataset has been converted from the original \textbf{EDF} format to CSV for ease of use in machine learning applications. Each file contains valuable data that can be used for EEG signal processing, feature extraction, and classification tasks related to cognitive and mental workload analysis. The dataset is well-suited for studies focusing on mental state recognition, workload assessment, and cognitive task analysis using EEG signals.
+
+The dataset used in this research includes EEG data with signals across various frequency bands, each representing different cognitive states. The EEG signals are segmented into five primary frequency bands. These bands are crucial for analyzing mental states and understanding cognitive processes.
+
+\textbf{Gamma Waves (30–100 Hz)}: Gamma waves are the fastest brain waves and are typically associated with high-level cognitive functions, such as problem-solving and concentration. These waves are prominent during tasks requiring intense mental activity.
+
+\textbf{Beta Waves (12–30 Hz)}: Beta waves are connected to an active and busy mind. These waves dominate during periods of logical thinking, decision-making, and focused mental tasks. They also signify wakeful consciousness and alertness.
+
+\textbf{Alpha Waves (8–12 Hz)}: Alpha waves occur when a person is in a reflective or restful state. They are seen during relaxed but wakeful moments, such as meditation or quiet reflection. Alpha waves typically indicate a state of calm and readiness for thought.
+
+\textbf{Theta Waves (4–8 Hz)}: Theta waves indicate drowsiness or the initial stages of sleep. They occur in states of deep relaxation or during the transition between wakefulness and deep sleep.
+
+\textbf{Delta Waves (0.5–4 Hz)}: Delta waves are the slowest of all the EEG frequencies and are dominant during deep sleep. These waves are associated with restorative processes and healing functions of the body.
+
+These frequency bands provide essential insights into the mental states that can be monitored using EEG. In the context of depression detection, changes in the patterns of these waves may reveal mental health trends, helping clinicians diagnose or monitor depressive episodes.
+
+\section{Feature Extraction Algorithms}
+
+This section focuses on the critical algorithms applied for the extraction of features from EEG signals, which are essential for detecting different mental states. For this project, the extraction of features from EEG signals is an important process because these features will be used as a basis for the further classification of mental health conditions. A range of deep learning methodologies, including 3D Convolutional Neural Networks (3D-CNN), 1D Convolutional Neural Networks (1D-CNN), and numerous spectral techniques, are used to get these features efficiently. To make the classification accuracy as high as possible, an optimal weighted fusion approach is used in a proper combination process involving features extracted.
+
+
+\subsection{Feature 1: Spectrogram with 3D-CNN Features}
+
+The first stage of the feature extraction process would be by processing the EEG signal as indicated and denoted as \( \text{SIG}^{inp}_h \), to give spectrogram images that represent visually the frequency spectrum of the EEG signals. Then these spectrograms undergo the high-performance architecture of a 3D-CNN in order to extract deep features, which encapsulate critical information about the mental states of interest.
+
+In 3D-CNN architectures, convolutional layers are presented which implement several operations of convolution in a three-dimensional volume of the images with defined kernels. Convolutional networks consist of four convolutional layers as well as the max-pooling layer corresponding to the above mentioned ones. This kind of layering helps in reducing spatial dimensions and prevents parameters from exceeding limits, hence making it efficient and having fewer chances to overfit. After that, the model is going through the convolutional layers followed by the ReLU activation function, which, in this case, helps in adding non-linearity to the model and increases its learning capacity.
+
+Once the signal passes through the deepest convolutional layers, the output is flattened into a one-dimensional vector and subsequently fed into a fully connected layer. This layer acts as the classifier, interpreting the extracted features for further processing. The features generated from this process are denoted as \( \text{FE}^{3D-CNN}_h \), and these are subsequently utilized in the optimal weighted feature fusion phase to enhance classification performance.
+
+\subsection{Feature 2: 1D-CNN Features}
+
+In addition to utilizing 3D-CNN, the EEG signals \( \text{SIG}^{inp}_h \) are also processed through a 1D Convolutional Neural Network (1D-CNN). This approach is particularly well-suited for time-series data, such as EEG signals, allowing for the extraction of deep features that can reveal significant patterns over time. The process is structured as follows:
+
+\paragraph{Convolution Layer:} 
+
+Applying the convolution operation across certain regions of the input signal to produce one-dimensional feature maps. This can be achieved using a number of convolution kernels which are capable of extracting various features from the input signal. The mathematical representation for a 1D convolution operation can be written as :
+
+\[
+y^m_n = \sum_{p=1}^{N} y^{m-1}_p * l^m_{pn} + u^m_n  \tag{1}
+\] 
+
+In this equation:
+- \( l \) represents the convolution kernel,
+- \( b \) indicates the number of kernels employed,
+- \( N \) denotes the number of channels present in the input signal,
+- \( u \) is the bias associated with the kernel, and
+- \( * \) symbolizes the convolution operator.
+
+\paragraph{Pooling Layer:} 
+
+Following the convolution layer, a pooling layer, specifically utilizing average pooling, is incorporated. This layer serves the crucial function of compressing the input data while preserving essential information. By applying pooling, the spatial size of the feature maps is significantly reduced, allowing the model to focus on the most prominent features. Additionally, max pooling is employed, which selects the maximum value within a defined region, enhancing feature representation. The features extracted through the 1D-CNN process are labeled as \( \text{FE}^{1D-CNN}_l \), and these features are then passed on to the optimal weighted feature fusion phase.
+
+\begin{figure}[htbp]
+\hspace*{0.2cm}
+\includegraphics[width=8cm, height=10cm]{flowchart1_300.jpg}  % Specify both width and height
+\caption{Architecture of the recommended depression detection model.}
+\label{fig}
+\end{figure}
+
+
+\subsection{Feature 3: Spectral Features}
+
+Moreover, the EEG signal \( \text{SIG}_h^{inp} \) is convolved using Short-Time Fourier Transform in order to convert it into spectral features. This approach analyzes the signal in a way such that localized frequency components are noticed, describing various mental states. Thus, the mathematical representation of the STFT is given as:
+
+
+
+\[
+\textit{stft}(\omega, j, \gamma) = \int_{-\infty}^{\infty} p(m) n^*(m - j) e^{-i\omega j} \, km       \tag{2}
+\]
+
+
+Where:
+- \( n^*(m - j) \) represents the conjugate of the window function applied in the analysis,
+- \( p(j) \) denotes the analytical signal derived from the EEG data.
+
+The spectral features extracted through this process are represented as \( \text{FE}_{stft_t} \) and are subsequently forwarded to the next phase of feature fusion.
+\subsection{Optimal Weighted Fused Features}
+
+In the context of mental state detection from EEG signals, it is crucial to combine the extracted features from various methodologies to leverage their unique strengths. The three sets of features extracted from 3D-CNN (\( \text{OF}^{3D-CNN}_h \)), 1D-CNN (\( \text{OF}^{1D-CNN}_l \)), and (\( \text{OF}^{stft}_t \)) are fused in the optimal weighted feature fusion phase. This fusion phase employs the Chaotic Owl Invasive Weed Search Optimization (COIWSO) algorithm to determine the optimal weights for each feature set, ensuring a balanced contribution from each method.
+
+The fusion of features is represented by the following equation:
+
+\[
+\begin{align}
+FFu^{tn}_g &= W_{g1} \cdot \text{OF}^{3D-CNN}_h + W_{g2} \cdot \text{OF}^{1D-CNN}_l \\
+&\quad + W_{g3} \cdot \text{OF}^{stft}_t   
+\end{align}
+\tag{3}
+\]
+
+Where:
+
+\begin{itemize}
+    \item \( FF_{utn_g} \) denotes the fused feature set that integrates information from all three methods.
+    \item \( W_{g1}, W_{g2}, W_{g3} \) are the weights assigned to the respective feature sets, indicating their importance in the fusion process.
+    \item \( \text{OF}^{3D-CNN}_h, \text{OF}^{1D-CNN}_l, \text{OF}^{stft}_t \) represent the optimized features obtained from each method, capturing distinct aspects of the EEG signals.
+\end{itemize}
+
+These weights are fine-tuned within the range \([0.01, 0.99]\), preventing any single feature set from dominating the fusion and ensuring that each contributes meaningfully to the final output.
+
+The optimization process aims to create a fused feature set that maximizes discriminative power while minimizing the risk of overfitting. By effectively combining features derived from 3D-CNN, 1D-CNN, and STFT, the model can achieve improved robustness and generalization when applied to new, unseen data.
+
+The use of the COIWSO algorithm plays a pivotal role in the weight optimization process, allowing for a systematic exploration of the weight space to identify the optimal configuration. This ensures that the resulting fused features provide the maximum possible benefit for subsequent classification tasks.
+
+In summary, the optimal weighted feature fusion phase represents a critical step in enhancing the overall performance of the model by integrating the strengths of different feature extraction techniques. This comprehensive approach aims to achieve superior accuracy in detecting mental states based on EEG signals.
+
+\subsection{Fitness Function for Feature Fusion}
+
+The primary objective of the feature fusion process is to maximize the correlation among the extracted features. This is achieved using the following fitness function:
+
+\[
+    Ft_1 = \underset{\{ OF^{3D-CNN}_w, OF^{1D-CNN}_i, OF^{stft}_p, W_{g1}, W_{g2}, W_{g3} \}}{\math{arg \, min}} \left( \frac{1}{CRR} \right) \tag{4}
+\]
+
+Where \( CRR \) represents the correlation coefficient, calculated by the following equation:
+
+\[
+CRR = \frac{\sum (h_v - \bar{h})(y_v - \bar{y})}{\sqrt{\sum (h_v - \bar{h})^2 \sum (y_v - \bar{y})^2}} \tag{5}
+\]
+
+In this context:
+- \( hv \) refers to the variable feature value that is being analyzed,
+- \( h \) represents the specific feature under consideration,
+- \( y \) denotes the sample value, and
+- \( \overline{y} \) signifies the mean of the sample values.
+
+The fitness function is essential as it ensures that the fused features exhibit maximum discriminative power, facilitating a more effective and accurate classification task in identifying mental health conditions.
+
+\section{Result and Analysis}
+% Full-width table in a two-column layout
+The following table presents a comprehensive survey of various machine learning models and their applications in the analysis of EEG signals and other medical fields. Each entry highlights significant research papers that focus on mental health outcomes through the utilization of advanced machine learning techniques. The table summarizes key aspects of these studies, including the specific algorithms employed, the features extracted from EEG data, the datasets utilized for model training and evaluation, and the corresponding performance metrics. This analysis not only underscores the diverse methodologies in this research domain but also emphasizes the growing importance of machine learning in enhancing mental health detection and diagnosis.
+ Furthermore, this comparative analysis serves as a foundation for future work, facilitating the identification of gaps in existing research and guiding the development of more robust and accurate models for mental health assessment.
+
+
+\begin{table*}
+  \centering
+  \caption{Survey of Machine Learning Models and Applications in EEG and Medical Fields}
+  \label{tab:ml_survey}
+  \renewcommand{\arraystretch}{1.5}
+  \begin{adjustbox}{max width=\linewidth,center}
+  \begin{tabular}{|p{0.15\linewidth}|p{0.15\linewidth}|p{0.15\linewidth}|p{0.15\linewidth}|p{0.15\linewidth}|p{0.15\linewidth}|}
+    \hline
+    \textbf{Research Paper} & \textbf{Work} & \textbf{Machine Learning Algorithms} & \textbf{Features} & \textbf{Dataset Used} & \textbf{Evaluation Metrics} \\ \hline
+
+    Depression Detection via CNNs & Chang Su et al.[31] & CNN, RNN, DNN & Text, Speech, FMRI, SMRI & Custom Dataset & Accuracy, Precision, Recall \\ \hline
+    Medical Image Analysis with ML & Meghavi Rana et al.[32] & CNN, GANs & Texture, Shape Features & Limited Availability & -- \\ \hline
+    Stress Detection Using EEG & Joaquin J. Gonzalez-Vazquez et al.[33] & DNN, RNN, GRU, LSTM & Stress Levels & Custom Dataset & Multi-class Prediction \\ \hline
+    EEG Motor Imagery with Attention & Wei-Yen Hsu et al.[34] & CNN, LDA, SVM & Time-Frequency Features & BCI Dataset & ANOVA Tests \\ \hline
+    Emotion Recognition from EEG & Yong Peng et al.[35] & Semi-Supervised Learning & Differential Entropy & Shanghai Jiao Tong Dataset & Feature Selection \\ \hline
+    Automated Schizophrenia Detection & Jagdeep Rahul et al.[36] & CNN, LSTMs & Time-Frequency Features & Limited Availability & Automated Classification \\ \hline
+    CNN for EEG Depression Features & Zhijiang Wan et al.[37] & CNN & EEG Features & Custom Dataset & Accuracy, Sensitivity \\ \hline
+    Deep Learning for Depression Detection & Ayan Seal et al.[38] & CNN & EEG Signals & Custom Dataset & Accuracy (0.9937), AUC (0.999) \\ \hline
+    3D CNN for Major Depression Diagnosis & Danish M. Khan et al.[39] & 3D CNN & Brain Connectivity & EEG Dataset (30 MDD, 30 HC) & Accuracy (100\%), Sensitivity \\ \hline
+    Clinical Depression Detection via EEG & PP Thoduparambil et al.[40] & CNN, LSTM & Signal Sequences & Custom Dataset & Accuracy (99.07\%, 98.84\%) \\ \hline
+    Attention Mechanism in EEG Depression & Xiaowei Zhang et al.[41] & 1D CNN & EEG Signals & 170 Subject Dataset & Accuracy, Generalization \\ \hline
+    Pervasive Diagnosis Using DBN & Hanshu Cai et al.[42] & DBN, SVM, ANN & EEG Data from Fp Channels & 178 Subject Dataset & Accuracy (78.24\%) \\ \hline
+    Resting State EEG for Depression & W. Mao et al.[43] & CNN & Signal Processing & Custom Dataset & Accuracy (77.20\%, 76.14\%) \\ \hline
+    Screening of Depression with CNN & U.R. Acharya et al.[21] & 13-layer CNN & EEG Signals & 15 Normal, 15 Depressed Dataset & Accuracy (93.54\%, 95.49\%) \\ \hline
+    
+    EEG Depression Diagnosis Using DNN & Zeng et al.[23] & 2D CNN & Time-Frequency Features & 100 Subject Dataset & Accuracy (95.8\%), Precision \\ \hline
+    EEG Signal Classification with CNN & Chen et al. [24] & CNN & EEG Time-Series & 68 Depressed, 64 Healthy Dataset & Accuracy (90\%) \\ \hline
+    Emotion Recognition from EEG Signals & Ay et al.[25] & CNN, LSTM & Power Spectrum Features & Custom Dataset & Accuracy (85\%) \\ \hline
+    EEG-Based Depression Detection & Li et al.[31] & 3D CNN & Spectral-Temporal Features & 30 MDD, 30 Healthy Dataset & Accuracy (98.95\%) \\ \hline
+    Spectral Feature Extraction for EEG Depression & Liao et al. [26] & Kernel Eigen-Filter with CNN & Multi-Channel EEG Signals & Public Dataset & Accuracy (80\%) \\ \hline
+    EEG Recognition of Depression & Shen et al. [27] & CNN & Spatial Characteristics & Public Dataset & Accuracy (68.13\%) \\ \hline
+    Graph-Based EEG for Depression Prediction & Rong et al. [28] & CNN & Brain Region Signals & Mild Depression Dataset & Accuracy (80.74\%) \\ \hline
+    Semi-Supervised Learning for EEG Detection & Wang D. et al.[29] & CNN, Graph Networks & EEG Connectivity & Extended Dataset & Accuracy (86.87\%) \\ \hline
+    Novel CNN Framework for EEG Depression Diagnosis & Hosseinifard et al.[10] & CNN, SVM & Power spectrum features, Temporal and frequency domain features & Private dataset & Accuracy (88.6\%) \\
+\hline
+Automated Detection of Depression from EEG Signals Using Deep Learning Techniques & S. Kumar et al.[12] & CNN, RNN & Temporal, Spatial, and Frequency features & Public EEG dataset (60 subjects) & Accuracy (92.5\%), Precision \\
+\hline
+EEG-Based Deep Learning Models for Depression Classification & M. R. Singh et al.[14] & CNN, LSTM & EEG Signal sequences, Spectral features & Custom EEG dataset (80 subjects) & Accuracy (94.0\%), Sensitivity \\
+\hline
+  \end{tabular}
+  \end{adjustbox}
+\end{table*}
+% \begin{table*}
+%   \centering
+%   \caption{Survey of Machine Learning Models and Applications in EEG and Medical Fields}
+%   \label{tab:ml_survey}
+%   \renewcommand{\arraystretch}{1.5}
+%   \begin{adjustbox}{max width=\linewidth,center} % Adjust to fit the width and center the table
+%   \begin{tabular}{|p{0.15\linewidth}|p{0.15\linewidth}|p{0.15\linewidth}|p{0.15\linewidth}|p{0.15\linewidth}|p{0.15\linewidth}|} % Use 'tabular' instead of 'tabular*'
+%     \hline
+%     \textbf{Research Paper} & \textbf{Work} & \textbf{Machine Learning Algorithms} & \textbf{Features} & \textbf{Dataset Used} & \textbf{Evaluation Metrics} 
+%     \\ \hline
+
+% Novel CNN Framework for EEG Depression Diagnosis & Hosseinifard et al.[30] & CNN, SVM & Power spectrum features, Temporal and frequency domain features & Private dataset & Accuracy (88.6\%) \\
+% \hline
+% Automated Detection of Depression from EEG Signals Using Deep Learning Techniques & S. Kumar et al.[31] & CNN, RNN & Temporal, Spatial, and Frequency features & Public EEG dataset (60 subjects) & Accuracy (92.5\%), Precision \\
+% \hline
+% EEG-Based Deep Learning Models for Depression Classification & M. R. Singh et al.[32] & CNN, LSTM & EEG Signal sequences, Spectral features & Custom EEG dataset (80 subjects) & Accuracy (94.0\%), Sensitivity \\
+% \hline
+    
+%   \end{tabular}
+%   \end{adjustbox}
+% \end{table*}
+
+\begin{figure*}[htbp]
+\centering
+\includegraphics[width=18cm, height=10cm]{graph1300 (1).jpg}  % Specify both width and height
+\caption{comparision of accuracy of  different algorithms.}
+\label{fig}
+\end{figure*}
+
+\section{Performance Evaluation Parameters}
+
+Evaluating the performance of models designed for depression detection using EEG signals is a critical step in determining their effectiveness. The following metrics are commonly employed to measure how well these models perform, especially those utilizing advanced techniques like 3D Convolutional Neural Networks (CNNs).
+
+
+
+
+1. \textbf{Accuracy (AC)}:
+   \[
+   \text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN} \tag{6}
+   \]
+   Accuracy represents the overall proportion of correct predictions made by the model, encompassing both true positives (TP) and true negatives (TN).
+   
+   - \textbf{True Positives (TP)}: The number of instances where the model correctly predicts a positive case (i.e., correctly identifying a person as depressed).
+   
+   - \textbf{True Negatives (TN)}: The number of instances where the model correctly predicts a negative case (i.e., correctly identifying a person as not depressed). A higher accuracy value indicates a model that reliably distinguishes between depressed and non-depressed individuals.
+
+2. \textbf{Precision}:
+   \[
+   \text{Precision} = \frac{TP}{TP + FP}  \tag{7}
+   \]
+   Precision assesses the ratio of correctly predicted positive cases (true positives) to all predicted positives (true positives plus false positives). This metric is crucial in contexts where false positives can lead to unnecessary anxiety or treatment.
+
+3. \textbf{Recall (Sensitivity)}:
+   \[
+   \text{Recall} = \frac{TP}{TP + FN} \tag{8}
+   \]
+   Recall measures the model's ability to identify all actual positive cases. It reflects the effectiveness of the model in capturing depressed individuals, emphasizing the importance of minimizing false negatives (FN), which occur when the model incorrectly identifies a depressed individual as not depressed.
+
+4. \textbf{F1 Score}:
+   \[
+   \text{F1 Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}  \tag{9}
+   \]
+   The F1 Score combines precision and recall into a single metric, offering a balance that is particularly useful in scenarios with class imbalance. This metric allows for a more nuanced evaluation of model performance.
+\section{Conclusion}
+
+This paper proposes a state-of-the-art framework for depression detection using EEG signals through a metaheuristic optimization technique to enhance the effectiveness in optimization of features, thus carrying out the most accurate detection process possible. The feature extraction procedure in this paper produced three different types of feature sets from the EEG signals. The features are further processed by a 3D-CNN, time-domain features are extracted from a 1D-CNN, and spectral features are fused using a weighted feature fusion method optimized by the Chaotic Owl Invasive Weed Search Optimization to ensure that only the most informative data passes on to the classification phase.
+
+With the purpose of achieving better accuracy in depression detection, the SA-GDensenet model enhanced with COIWSO-tuned parameters is proposed herein. Our proposed framework enhances by 15.85\%, 13.09\%, and 10.46\% in comparison to typical models like JA-SA-GDensenet, COS-SA-GDensenet, and IWO-SA-GDensenet, respectively. Precision analysis shows this model works better than other models, such as BiLSTM and DNN, with improvements of 8.6\% and 5.9\%, respectively.
+
+This approach has proved very effective for the early diagnosis of depression, and it, therefore, has immense promise for actual applications particularly in mobile-based systems for mental health monitoring. Continuous and timely monitoring in such systems has great clinical value for the diagnosing and management of mental health disorders.
+
+Although the proposed method has benefits, it still has some limitations. These mainly include having to be applied with more heterogeneous datasets and more fine-grained optimization approaches. Further exploration of the model interpretability and generalization is also important. Future work will, therefore, most probably be building on improving these limitations in the system, making it robust and applicable in broader contexts.
+
+
+
+
+
+
+\begin{thebibliography}{00}
+
+
+\bibitem{b1} Y. Peng, F. Jin, W. Kong, F. Nie, B. -L. Lu and A. Cichocki, "OGSSL: A Semi-Supervised Classification Model Coupled With Optimal Graph Learning for EEG Emotion Recognition," in IEEE Transactions on Neural Systems and Rehabilitation Engineering, vol. 30, pp. 1288-1297, 2022, doi: 10.1109/TNSRE.2022.3175464.
+
+\bibitem{b2} S.Candemir et al., “Automated coronary artery atherosclerosis detection and weakly supervised localization on coronary CT angiography with a deep 3-dimensional convolutional neural network,” Computerized Med. Imag. Graph., vol. 83, Jan. 2020, Art. no. 101721,
+doi: 10.1016/j.compmedimag.2020.101721.
+\bibitem{b3}Z. Wan, J. Huang, H. Zhang, H. Zhou, J. Yang and N. Zhong, "HybridEEGNet: A Convolutional Neural Network for EEG Feature Learning and Depression Discrimination," in IEEE Access, vol. 8, pp. 30332-30342, 2020, doi: 10.1109/ACCESS.2020.2971656.
+
+\bibitem{b4} A. Seal, R. Bajpai, J. Agnihotri, A. Yazidi, E. Herrera-Viedma and O. Krejcar, "DeprNet: A Deep Convolution Neural Network Framework for Detecting Depression Using EEG," in IEEE Transactions on Instrumentation and Measurement, vol. 70, pp. 1-13, 2021, Art no. 2505413, doi: 10.1109/TIM.2021.3053999. 
+\bibitem{b5} D. M. Khan, N. Yahya, N. Kamel and I. Faye, "Automated Diagnosis of Major Depressive Disorder Using Brain Effective Connectivity and 3D Convolutional Neural Network," in IEEE Access, vol. 9, pp. 8835-8846, 2021, doi: 10.1109/ACCESS.2021.3049427. 
+\bibitem{b6} Y. Yorozu, M. Hirano, K. Oka, and Y. Tagawa, ``Electron spectroscopy studies on magneto-optical media and plastic substrate interface,'' IEEE Transl. J. Magn. Japan, vol. 2, pp. 740--741, August 1987 [Digests 9th Annual Conf. Magnetics Japan, p. 301, 1982].
+\bibitem{b7} Zhu, Jing et al. “Mutual Information Based Fusion Model (MIBFM): Mild Depression Recognition Using EEG and Pupil Area Signals.” IEEE Transactions on Affective Computing 14 (2023): 2102-2115.
+\bibitem{b8} Bakare, Savita et al. “Detection of Mental Stress using EEG signals - Alpha, Beta, Theta, and Gamma Bands.” 2024 5th International Conference for Emerging Technology (INCET) (2024): 1-9.
+\bibitem{b9} Zhang, Zhongyi et al. “A novel EEG-based graph convolution network for depression detection: Incorporating secondary subject partitioning and attention mechanism.” Expert Syst. Appl. 239 (2023): 122356.
+\bibitem{b10} Hosseinifard, B., Moradi, M. H., \& Rostami, R. (2013). Classifying depression patients and normal subjects using machine learning techniques and nonlinear features from EEG signal. \textit{Computer Methods and Programs in Biomedicine, 109}(3), 339-345. https://doi.org/10.1016/j.cmpb.2012.10.008
+\bibitem{b11} Mamdouh, Mona et al. “Stress Detection in the Wild: On the Impact of Cross-Training on Mental State Detection.” 2023 40th National Radio Science Conference (NRSC) 1 (2023): 150-158.
+\bibitem{b12} Kumar, S., Sharma, A., \& Tsunoda, T. (2020). Automated Detection of Depression from EEG Signals Using Deep Learning Techniques. \textit{Journal Name}, Vol., pages.
+\bibitem{b13} Sadredini, Seyedeh Zohreh et al. “Depression Detection Using Chaotic Features of EEG Signals and CNN Model.” 2023 30th National and 8th International Iranian Conference on Biomedical Engineering (ICBME) (2023): 98-103.
+\bibitem{b14} Singh, M. R., Kumar, Vinod Kumar\& Nilanjan Dey (2021). EEG-Based Deep Learning Models for Depression Classification. 
+\bibitem{b15} Wu, Chien-Te et al. “Resting-State EEG Signal for Major Depressive Disorder Detection: A Systematic Validation on a Large and Diverse Dataset.” Biosensors 11 (2021): n. pag.
+\bibitem{b16} Wang, Baiyang et al. “Brain Wave Recognition Method for Depression in College Students Based on 2D Convolutional Neural Network.” Proceedings of the 5th International Conference on Big Data and Education (2022): n. pag.
+\bibitem{b17} Zhu, Jing et al. “EEG based depression recognition using improved graph convolutional neural network.” Computers in biology and medicine 148 (2022): 105815 .
+\bibitem{b18} Chen, Tao et al. “Exploring Self-Attention Graph Pooling With EEG-Based Topological Structure and Soft Label for Depression Detection.” IEEE Transactions on Affective Computing 13 (2022): 2106-2118.
+\bibitem{b19} Al Fahoum, Amjed S and Ala’a Zyout. “Early detection of neurological abnormalities using a combined phase space reconstruction and deep learning approach.” Intelligence-Based Medicine (2023): n. pag.
+\bibitem{b20} Mohan, Ranjani and Supraja Perumal. “Classification and Detection of Cognitive Disorders like Depression and Anxiety Utilizing Deep Convolutional Neural Network (CNN) Centered on EEG Signal.” Traitement du Signal (2023): n. pag.
+\bibitem{b21} Acharya UR, Oh SL, Hagiwara Y, Tan JH, Adeli H, Subha DP. Automated EEG-based screening of depression using deep convolutional neural network. Comput Methods Programs Biomed. 2018 Jul;161:103-113. 
+
+\bibitem{b22} Empowering Mental Health: CNN and LSTM
+Fusion for Timely Depression Detection in
+Women by Divya Pakkattil and Ravindran Sri Devi. 
+
+\bibitem{b23} Wang Z, Ma Z, Liu W, An Z, Huang F. A Depression Diagnosis Method Based on the Hybrid Neural Network and Attention Mechanism. Brain Sciences. 2022; 12(7):834. https://doi.org/10.3390/brainsci12070834 . 
+
+\bibitem{b24} Chen, J., Wang, C., Zhou, Z., & Yu, R. (2021). CNN-based classification of depression from EEG signals with functional connectivity. Frontiers in Neuroscience, 15, 725587 
+
+\bibitem{b25} Ay, M., Ozkurt, N., & Alagoz, F. (2019). EEG-based emotion recognition using hybrid CNN-LSTM model. International Journal of Neural Systems, 30(12), 2030047. 
+
+\bibitem{b26} Liao, W., Pan, Z., Gu, X., & Zhang, D. (2017). Spectral-spatial feature extraction in EEG-based depression detection using CNN. Neurocomputing, 267, 495-505. 
+
+\bibitem{b27} Shen, Y., Duan, Y., & Zhang, L. (2021). EEG-based depression recognition using CNN and adaptive lead weighting. Computer Methods and Programs in Biomedicine, 208, 106301.
+
+\bibitem{b28} Rong, X. (2020). Graph-based EEG analysis for predicting depression using convolutional neural networks. Biomedical Signal Processing and Control, 62, 102019.
+
+\bibitem{b29} Wang, D., Zhou, Q., Yang, Y., & Chen, H. (2021). Semi-supervised learning for EEG-based depression detection using CNN and graph convolutional networks. IEEE Access, 9, 138234-138245. 
+
+\bibitem{b30} Hosseinifard, B., Haghighi, A. B., & Pooyan, M. (2021). A novel convolutional neural network framework for depression detection using EEG signals. Artificial Intelligence in Medicine, 115, 102072. 
+
+\bibitem{b31} Chang, S., Xu, Z., Pathak, J., \& Wang, F. Deep Learning in Mental Health Outcome Research. 
+\bibitem{b32} Rana, M., \& Bhushan, M. Machine Learning and Deep Learning Approach for Medical Image Analysis.
+\bibitem{b33} Gonzalez-Vazquez, J.J., Bernat, L., Ramon, J.L., Morell, V., \& Ubeda, A. Deep Learning Approach for Multi-Level Mental Stress from EEG Using Serious Games.
+\bibitem{b34} Hsu, W.-Y., \& Cheng, Y.-W. EEG-Channel-Temporal-Spectral-Attention Correlation for Motor Imagery EEG Classification.
+\bibitem{b35} Peng, Y. et al. OGSSL: Semi-Supervised Classification for EEG Emotion Recognition.
+\bibitem{b36} Rahul, J. et al. Systematic Review of EEG-Based Automated Schizophrenia Classification.
+\bibitem{b37} Wan, Z. et al. HybridEEGNet: A Convolutional Neural Network for EEG Feature Learning and Depression Discrimination.
+\bibitem{b38} Seal, A. et al. DeprNet: A Deep Convolution Neural Network Framework for Detecting Depression Using EEG.
+\bibitem{b39} Khan, D.M. et al. Automated Diagnosis of Major Depressive Disorder Using Brain Effective Connectivity and 3D CNN.
+\bibitem{b40} Thoduparambil, P.P., Dominic, A., Varghese, S.M. EEG-based deep learning model for the automatic detection of clinical depression.
+\bibitem{b41} Zhang, X. et al. EEG-based Depression Detection Using Convolutional Neural Network with Demographic Attention Mechanism.
+\bibitem{b42} Cai, H. et al. Pervasive EEG diagnosis of depression using Deep Belief Network with three-electrodes EEG collector.
+\bibitem{b43} Mao, W. et al. Resting state EEG-based depression recognition using deep learning method.
+\bibitem{b44} Acharya, U.R. et al. Automated EEG-based screening of depression using deep convolutional neural network.
+
+
+\end{thebibliography}
+\vspace{12pt}
+
+\end{document}
